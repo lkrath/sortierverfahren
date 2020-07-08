@@ -3,24 +3,15 @@
 zahlen = [7, 9, 12, 75, 8, 78, 3, 14]
 
 def merge_sort(list):
-    if len(list) > 2:
-        half = (len(list)-1) // 2
+    if len(list) > 1:
+        half = len(list) // 2
         left = merge_sort(list[:half])
         right = merge_sort(list[half:])
 
         return merge(left, right)
 
     else:
-        return list
-
-#    if len(list) <= 1:
-#        return list;
-
-#    left, right = merge_sort(list[:len(list) // 2]), merge_sort(list[len(list) // 2:])
-
-#    return merge(left, right)    
-
-
+        return list 
 
 def merge(lista, listb):
     listc = []
@@ -31,6 +22,7 @@ def merge(lista, listb):
             a += 1
         else:
             listc.append(listb[b])
+            b += 1
 
         if a == len(lista): 
             listc.extend(listb[b:])
