@@ -20,9 +20,9 @@ def setze_dame(x, y, anzahl_damen):
 
 def setze_bedrohung(x, y):
     for i in range(n):
-        if brett[x][i] == 0:        # senkrecht
+        if brett[x][i] == 0:        # waagerecht
             brett[x][i] += 1
-        if brett[i][y] == 0:        # waagerecht
+        if brett[i][y] == 0:        # senkrecht
             brett[i][y] += 1
         if x + i < n and y + i < n:
             if brett[x+i][y+i] == 0:    # diagonal rechts oben
@@ -44,9 +44,9 @@ def entferne_dame(x, y, anzahl_damen):
 
 def entferne_bedrohung(x, y):
     for i in range(n):
-        if brett[x][i] == 0:        # senkrecht
+        if brett[x][i] == 0:        # waagerecht
             brett[x][i] -= 1
-        if brett[i][y] == 0:        # waagerecht
+        if brett[i][y] == 0:        # senkrecht
             brett[i][y] -= 1
         if x + i < n and y + i < n:
             if brett[x+i][y+i] == 0:    # diagonal rechts oben
@@ -81,9 +81,24 @@ def loesung(reihe):
                 ld = i
                 if loesung(reihe+1):
                     return True
-        entferne_dame(ld, reihe, anzahl_damen)
-        return False
+                else:
+                    entferne_dame(ld, reihe, anzahl_damen)
+                    #return False
+
+
+def loesung2(reihe):
+    if anzahl_damen == n:
+        return True
+    else:
+        for i in range(n):
+            if brett[i][reihe] == 0:
+                setze_dame(i, reihe, anzahl_damen)
+                if loesung2(reihe + 1) == True:
+                    return True
+                else:
+                    entferne_dame(i, reihe, anzahl_damen) 
 
 
 loesung(0)
+loesung2(0)
 zeichne_brett()
