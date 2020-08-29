@@ -4,7 +4,7 @@ n = 4
 anzahl_damen = 0
 
 # leer = 0
-# bedroht >= 1
+# bedroht > 0
 # dame = -1
 
 brett = [[0 for i in range(n)] for j in range(n)]
@@ -71,20 +71,17 @@ def zeichne_brett():
         print("\n")
 
 def loesung(reihe):
-    ld = 0
     if anzahl_damen == n:
         return True
     else:
         for i in range(n):
             if brett[i][reihe] == 0:
                 setze_dame(i, reihe, anzahl_damen)
-                ld = i
                 if loesung(reihe+1):
                     return True
                 else:
-                    entferne_dame(ld, reihe, anzahl_damen)
+                    entferne_dame(i, reihe, anzahl_damen)
                     #return False
-
 
 def loesung2(reihe):
     if anzahl_damen == n:
@@ -97,8 +94,7 @@ def loesung2(reihe):
                     return True
                 else:
                     entferne_dame(i, reihe, anzahl_damen) 
+                    return False
 
-
-loesung(0)
 loesung2(0)
 zeichne_brett()
