@@ -20,45 +20,46 @@ def setze_dame(x, y, anzahl_damen):
 
 def setze_bedrohung(x, y):
     for i in range(n):
-        if brett[x][i] == 0:        # waagerecht
+        if brett[x][i] >= 0:        # waagerecht
             brett[x][i] += 1
-        if brett[i][y] == 0:        # senkrecht
+        if brett[i][y] >= 0:        # senkrecht
             brett[i][y] += 1
         if x + i < n and y + i < n:
-            if brett[x+i][y+i] == 0:    # diagonal rechts oben
+            if brett[x+i][y+i] >= 0:    # diagonal rechts oben
                 brett[x+i][y+i] += 1
         if x - i >= 0 and y + i < n:
-            if brett[x-i][y+i] == 0:    # diagonal links oben
+            if brett[x-i][y+i] >= 0:    # diagonal links oben
                 brett[x-i][y+1] += 1
         if y - i >= 0 and x + i < n:
-            if brett[x+i][y-i] == 0:    # diagonal rechts unten
+            if brett[x+i][y-i] >= 0:    # diagonal rechts unten
                 brett[x+i][y-1] += 1
         if x - i >= 0 and y - i >= 0:
-            if brett[x-i][y-i] == 0:    # diagonal links unten
+            if brett[x-i][y-i] >= 0:    # diagonal links unten
                 brett[x-i][y-1] += 1
 
 def entferne_dame(x, y, anzahl_damen):
-    brett[x][y] == 0
-    entferne_bedrohung(x, y)
-    anzahl_damen += 1
+    if brett[x][y] == -1:
+        brett[x][y] == 0
+        entferne_bedrohung(x, y)
+        anzahl_damen -= 1
 
 def entferne_bedrohung(x, y):
     for i in range(n):
-        if brett[x][i] == 0:        # waagerecht
+        if brett[x][i] > 0:        # waagerecht
             brett[x][i] -= 1
-        if brett[i][y] == 0:        # senkrecht
+        if brett[i][y] > 0:        # senkrecht
             brett[i][y] -= 1
         if x + i < n and y + i < n:
-            if brett[x+i][y+i] == 0:    # diagonal rechts oben
+            if brett[x+i][y+i] > 0:    # diagonal rechts oben
                 brett[x+i][y+1] -= 1
         if x - i >= 0 and y + i < n:
-            if brett[x-i][y+i] == 0:    # diagonal links oben
+            if brett[x-i][y+i] > 0:    # diagonal links oben
                 brett[x-i][y+1] -= 1
         if y - i >= 0 and x + i < n:
-            if brett[x+i][y-i] == 0:    # diagonal rechts unten
+            if brett[x+i][y-i] > 0:    # diagonal rechts unten
                 brett[x+i][y-1] -= 1
         if x - i >= 0 and y - i >= 0:
-            if brett[x-i][y-i] == 0:    # diagonal links unten
+            if brett[x-i][y-i] > 0:    # diagonal links unten
                 brett[x-i][y-1] -= 1
 
 def zeichne_brett():
@@ -94,7 +95,7 @@ def loesung2(reihe):
                     return True
                 else:
                     entferne_dame(i, reihe, anzahl_damen) 
-                    return False
+        return False
 
 loesung2(0)
 zeichne_brett()
