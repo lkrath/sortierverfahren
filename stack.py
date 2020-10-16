@@ -1,13 +1,12 @@
 import node
 
-n = node.Node()
+head = node.Node(None)
 
 class Stack:
 
-
     def __init__(self):
         self.stack = "Stack"
-        head = n.getContent()
+        head = None
 
     def isEmpty():
         if head == 0:
@@ -19,4 +18,13 @@ class Stack:
         return head
 
     def pop():
+        x = head
+        head = n.getNext
         n.setContent(n.getNext)
+        return x
+
+    def push(n):
+        if head != 0:
+            head.setContent(n.getContent())
+        head = n
+        
