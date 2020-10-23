@@ -1,30 +1,28 @@
 import node
 
-head = node.Node(None)
-
 class Stack:
-
+    
+    head = node.Node(None)
+    
     def __init__(self):
         self.stack = "Stack"
-        head = None
 
-    def isEmpty():
-        if head == 0:
-            return True
-        else:
-            return False
+    def isEmpty(self):
+        return head.getContent() == None
 
-    def top():
+    def top(self):
         return head
 
-    def pop():
+    def pop(self):
+        global head
         x = head
-        head = n.getNext
-        n.setContent(n.getNext)
+        head = n.getNext()
+        n.setContent(n.getNext())
         return x
 
-    def push(n):
-        if head != 0:
+    def push(self, n):
+        global head
+        if head.getContent() != 0:
             head.setContent(n.getContent())
         head = n
         
