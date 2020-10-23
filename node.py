@@ -5,9 +5,9 @@ class Node:
         self.__content = content
         __next_node = None
 
-    def __init__(self):
-        self.node = "Node"
-        __next_node = None
+#    def __init__(self):
+#        self.node = "Node"
+#        __next_node = None
 
     def getContent(self):
         return __content
