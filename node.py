@@ -1,21 +1,19 @@
 class Node:
 
+    #__next_node = node.Node(None)
+
     def __init__(self, content):
         self.node = "Node"
         self.__content = content
-        __next_node = None
-
-#    def __init__(self):
-#        self.node = "Node"
-#        __next_node = None
-
+        self.__next_node = None
+  
     def getContent(self):
-        return __content
+        return self.__content
     
     def setContent(self, x):
-        __next_node = __content
-        __content = x
+        self.__next_node.setContent(self.__content)
+        self.__content = x
 
     def getNext(self):
-        return __next_node
+        return self.__next_node
         

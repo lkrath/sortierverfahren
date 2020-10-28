@@ -8,21 +8,19 @@ class Stack:
         self.stack = "Stack"
 
     def isEmpty(self):
-        return head.getContent() == None
+        return self.head.getContent() == None
 
     def top(self):
-        return head
+        return self.head
 
     def pop(self):
-        global head
-        x = head
-        head = n.getNext()
-        n.setContent(n.getNext())
+        x = self.head
+        self.head = self.head.getNext()
+        self.head.setContent(self.head.getNext())
         return x
 
     def push(self, n):
-        global head
-        if head.getContent() != 0:
-            head.setContent(n.getContent())
-        head = n
+        if self.head.getContent() != None:
+            self.head.setContent(n.getContent())
+        self.head = n
         
