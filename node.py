@@ -1,12 +1,11 @@
 class Node:
 
-    #__next_node = node.Node(None)
-
+    
     def __init__(self, content):
         self.node = "Node"
         self.__content = content
         self.__next_node = None
-  
+
     def getContent(self):
         return self.__content
     
@@ -16,4 +15,6 @@ class Node:
 
     def getNext(self):
         return self.__next_node
-        
+
+    def setNext(self, x):
+        self.__next_node == x   
