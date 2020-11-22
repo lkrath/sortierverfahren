@@ -8,10 +8,7 @@ class Stack:
         #self.head = node.Node(None)
 
     def isEmpty(self):
-        if self.head == None:
-            return True
-        else:
-            return False
+        return self.head == None
 
     def top(self):
         if self.head != None:
@@ -21,10 +18,16 @@ class Stack:
 
     def pop(self):
         x = self.head
-        self.head = self.head.getNext()
+        if self.head != None:
+            self.head = self.head.getNext()
         return x
 
     def push(self, n):
-        if self.head != None:
-            self.head.setNext(self.head)
-        self.head = n
+        if n != None:
+            n.setNext(self.head)
+            self.head = n
+
+
+        #if self.head != None:
+        #    self.head.setNext(self.head)
+        #self.head = n
