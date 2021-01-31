@@ -43,6 +43,6 @@ exampleZip.close()
 
 #exampleZip.extract('spam.txt')
 
-newZip = zipfile.ZipFile('new.zip', 'w')
-newZip.write('spam.txt', compress_type=zipfile.ZIP_DEFLATED)
-newZip.close()
+#newZip = zipfile.ZipFile('new.zip', 'w')
+#newZip.write('spam.txt', compress_type=zipfile.ZIP_DEFLATED)
+#newZip.close()

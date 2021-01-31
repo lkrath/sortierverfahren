@@ -10,7 +10,6 @@ class Node:
         return self.__content
     
     def setContent(self, x):
-        # self.__next_node.setContent(self.__content)
         self.__content = x
 
     def getNext(self):
