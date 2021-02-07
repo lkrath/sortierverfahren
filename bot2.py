@@ -27,24 +27,14 @@ async def on_message(message):
         await message.author.create_dm()
         await message.author.dm_channel.send(f'Hi')
 
-    if message.content == '!join':
-        channel = message.author.voice.channel
-        await channel.connect()
+@bot.command(pass_context = True)
+async def yt(ctx, url):
+    author = ctx.message.author
+    voice_channel = author.voice_channel
+    vc = await bot.join_voice_channel(voice_channel)
 
-#@bot.command(pass_context = True)
-#async def join(ctx):
-#    const connection = await message.member.voice.channel.join()
-    #author = ctx.message.author
-    #voice_channel 
+    player = await vc.create_ytdl_player(url)
+    player.start()
 
-@bot.command()
-async def join(ctx):
-    print('ok')
-    channel = ctx.author.voice.channel
-    await channel.connect()
-
-@bot.command()
-async def leave(ctx):
-    await ctx.voice_client.disconnect()
 
 bot.run(TOKEN)
