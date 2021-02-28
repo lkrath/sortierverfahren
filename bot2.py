@@ -11,11 +11,13 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='!')
 
+bot.run(TOKEN)
+
 @bot.event 
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord')
     channel = bot.get_channel(799670616381849643)
-    await channel.send('HI')
+    await channel.send('Hi')
 
 @bot.event
 async def on_message(message):
@@ -36,34 +38,25 @@ async def on_message(message):
         await message.author.create_dm()
         await message.author.dm_channel.send(f'Hi')
 
-    if message.content == '!join':
-        channel = message.author.voice.channel
-    #    if not voice.is_connected():
-        await channel.connect()
-
-    if message.content == '!leave':
-        channel = message.author.voice.channel
+    await bot.process_commands(message)
+    #if message.content == '!leave':
+    #    channel = message.author.voice.channel
         #if voice.is_connected():
-        await channel.disconnect()
+    #    await channel.disconnect()
 
 #    if message.content == 
 
+@bot.command()
 #@bot.command(pass_context=True)
-#async def leave(ctx):
-#    server = ctx.message.guild.voice_client
-#    await server.disconnect()
+async def leave(ctx):
+    server = ctx.message.guild.voice_client
+    await server.disconnect()
 
-#@bot.command(pass_context = True)
-#async def join(ctx):
-#    const connection = await message.member.voice.channel.join()
-    #author = ctx.message.author
-    #voice_channel 
-
-#@bot.command(pass_context = True)
-#async def join(ctx):
-#    channel = ctx.author.voice.channel
-#    if not voice.is_connected():
-#        await channel.connect()
+@bot.command(pass_context = True)
+async def join(ctx):
+    channel = ctx.author.voice.channel
+    #if not voice.is_connected():
+    await channel.connect()
 
 #@bot.command(pass_context = True)
 #async def leave(ctx):
