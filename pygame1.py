@@ -40,7 +40,8 @@ while start:
 
         if event.type == pg.K_LEFT:
             #if event.key == pg.K_LEFT:
-            i += 10
+            print('left')
+            i += 10 
             screen.fill((255, 255, 255))
             pg.draw.circle(screen, (0, 255, 255), (600-i, 400), 75)
             pg.display.flip
