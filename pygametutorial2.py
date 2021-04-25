@@ -3,8 +3,9 @@
 
 import pygame
 import os
+from pygame import mixer
 pygame.font.init()
-pygame.mixer.init()
+mixer.init()
 
 WIDTH, HEIGHT = 900, 500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -19,7 +20,7 @@ YELLOW = (255, 255, 0)
 BORDER = pygame.Rect(WIDTH//2 - 5, 0, 10, HEIGHT)
 
 #BULLET_HIT_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'Grenade1.mp3'))
-BULLET_FIRE_SOUND = pygame.mixer.Sound("Assets/1911-.45-ACP-Close-Single-Gunshot-C-www.fesliyanstudios.com.ogg")
+#BULLET_FIRE_SOUND = pygame.music.load("Assets/1911-.45-ACP-Close-Single-Gunshot-C-www.fesliyanstudios.com.ogg")
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
@@ -42,6 +43,14 @@ RED_SPACESHIP_IMAGE = pygame.image.load(os.path.join('Assets', 'spaceship_red.pn
 RED_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(RED_SPACESHIP_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), 270)
 
 SPACE = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'space.png')), (WIDTH, HEIGHT))
+
+def play_shot():
+    mixer.music.load("Assets/1911-.45-ACP-Close-Single-Gunshot-C.wav")
+    mixer.music.play()
+
+def play_explosion():
+    mixer.music.load(os.path.join('Assets', 'Grenade1.wav'))
+    mixer.music.play()
 
 def draw_window(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health):
     WIN.blit(SPACE, (0, 0))
@@ -131,27 +140,27 @@ def main():
                 if event.key == pygame.K_LCTRL and len(yellow_bullets) < MAX_BULLETS:
                     bullet = pygame.Rect(yellow.x + yellow.width, yellow.y + yellow.height//2 - 2, 10, 5)
                     yellow_bullets.append(bullet)
-                    #BULLET_FIRE_SOUND.play()
+                    play_shot()
 
                 if event.key == pygame.K_RCTRL and len(red_bullets) < MAX_BULLETS:
                     bullet = pygame.Rect(red.x, red.y + red.height//2 - 2, 10, 5)
                     red_bullets.append(bullet)
-                    #BULLET_FIRE_SOUND.play()
+                    play_shot()
 
             if event.type == RED_HIT:
                 red_health -= 1
-                #BULLET_HIT_SOUND.play()
+                play_explosion()
 
             if event.type == YELLOW_HIT:
                 yellow_health -= 1
-                #BULLET_HIT_SOUND.play()
+                play_explosion()
 
         winner_text = ""
         if red_health <= 0:
-            winner_text = "yellow wins"
+            winner_text = "Yellow wins"
 
         if yellow_health <= 0:
-            winner_text = "red wins"
+            winner_text = "Red wins"
 
         if winner_text != "":
             draw_winner(winner_text)
