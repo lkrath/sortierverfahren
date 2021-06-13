@@ -1,28 +1,30 @@
 import requests
 from bs4 import BeautifulSoup
 
+from app import app
+
 page = requests.get("https://weather.com/de-DE/wetter/heute/l/58f6e7daa27a17c55b080b60435aeabaccbfe4547a89e4f0ab77fbb603c38986")
 
-#if (page.status_code == 200):
-    #print('downloaded successfully')
+if (page.status_code == 200):
+    print('downloaded successfully')
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
-#print(soup.prettify())
+print(soup.prettify())
 
-t1 = soup.find('div', {'class': 'CurrentConditions--primary--3xWnK'})
+t1 = soup.find('div', {'class': 'CurrentConditions--primary--2DOqs'})
 
-print("Wetter in Bornheim: \nHeute: \n")
+a = "Wetter in Bornheim: \nHeute: \n"
 
 temperatur = list(t1.children)[0]
 wolken = list(t1.children)[1]
-print(temperatur.get_text())
-print(wolken.get_text())
+a += temperatur.get_text() + "\n"
+a += wolken.get_text() + "\n"
 
-r1 = soup.find('div', {'class': 'CurrentConditions--precipValue--RBVJT'})
+r1 = soup.find('div', {'class': 'CurrentConditions--primary--2DOqs'})
 
 regen = list(r1.children)[0]
-print(regen.get_text())
+a += regen.get_text()
 
 page2 = requests.get("https://weather.com/de-DE/wetter/10tage/l/58f6e7daa27a17c55b080b60435aeabaccbfe4547a89e4f0ab77fbb603c38986#detailIndex5")
 
@@ -30,28 +32,21 @@ soup2 = BeautifulSoup(page2.content, 'html.parser')
 
 
 
-print("\nHeute Nacht: \n")
+a += "\nHeute Nacht: \n"
 
-t2 = soup2.find('div', {'class': 'DailyContent--ConditionSummary--2vnrT'})
+t2 = soup2.find('div', {'class': 'DailyContent--DailyContent--rTQY_'})
 
 temp2 = list(t2.children)[0]
-print(temp2.get_text() + " Höchsttemperatur")
+a += temp2.get_text() + " Höchsttemperatur \n"
 
-r2 = soup2.find('div', {'class': 'DailyContent--label--3rOJ4'})
+r2 = soup2.find('div', {'class': 'DailyContent--value--3Xvjn'})
 
-regen2 = list(r2.children)[1]
-print(regen2.get_text() + " Regenwahrscheinlichkeit")
+#regen2 = list(r2.children)[0]
+#a += regen2.get_text() + " Regenwahrscheinlichkeit"
 
 
+@app.route('/')
+@app.route('/index')
 
-#print("\nÜbermorgen: \n")
-
-#t3 = soup2.find('div', {'class': 'DailyContent--ConditionSummary--2vnrT'})
-
-#temp3 = list(t3.children)[0]
-#print(temp3.get_text() + " Höchsttemperatur")
-
-#r3 = soup2.find('div', {'class': 'DailyContent--label--3rOJ4'})
-
-#regen3 = list(r3.children)[1]
-#print(regen3.get_text() + " Regenwahrscheinlichkeit")
+def index():
+    return a
